@@ -38,8 +38,9 @@ void MainWindow::on_pushButton_clicked()
 }
 
 void MainWindow::openFile(){
-    this->path_current = QFileDialog::getOpenFileName(this, "open", "", tr("Config Files (*.txt)"));
-    if(!this->path_current.isNull()){
+    QString file_path = QFileDialog::getOpenFileName(this, "open", "", tr("Config Files (*.txt)"));
+    if(!file_path.isNull()){
+        this->path_current = file_path;
         Local::getInstance()->connect(this->path_current.toStdString())([=](auto data){
             ui->textEdit->setText(QString::fromStdString(data));
         });
