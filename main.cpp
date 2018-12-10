@@ -7,7 +7,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     w.setWindowTitle("Untitled");
-    w.setFixedSize(400, 299);
+    w.setMinimumSize(400, 299);
+    w.setMaximumSize(960, 640);
 
     return a.exec();
 }
