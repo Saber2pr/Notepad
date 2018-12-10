@@ -1,0 +1,4 @@
+*.user
+MakeFile*
+debug/
+release/
