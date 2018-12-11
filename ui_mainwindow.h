@@ -21,7 +21,6 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTextEdit>
-#include <QtGui/QToolBar>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -32,13 +31,13 @@ public:
     QAction *actionOpen;
     QAction *actionSave;
     QAction *actionClose;
+    QAction *actionAbout;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTextEdit *textEdit;
     QPushButton *pushButton;
     QMenuBar *menuBar;
     QMenu *menuOpen;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -46,12 +45,17 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(400, 299);
+        QFont font;
+        font.setStyleStrategy(QFont::PreferAntialias);
+        MainWindow->setFont(font);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
         actionSave = new QAction(MainWindow);
         actionSave->setObjectName(QString::fromUtf8("actionSave"));
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
+        actionAbout = new QAction(MainWindow);
+        actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -75,9 +79,6 @@ public:
         menuOpen = new QMenu(menuBar);
         menuOpen->setObjectName(QString::fromUtf8("menuOpen"));
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -85,6 +86,7 @@ public:
         menuBar->addAction(menuOpen->menuAction());
         menuOpen->addAction(actionOpen);
         menuOpen->addAction(actionClose);
+        menuOpen->addAction(actionAbout);
 
         retranslateUi(MainWindow);
 
@@ -97,6 +99,7 @@ public:
         actionOpen->setText(QApplication::translate("MainWindow", "open", 0, QApplication::UnicodeUTF8));
         actionSave->setText(QApplication::translate("MainWindow", "close", 0, QApplication::UnicodeUTF8));
         actionClose->setText(QApplication::translate("MainWindow", "close", 0, QApplication::UnicodeUTF8));
+        actionAbout->setText(QApplication::translate("MainWindow", "about", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("MainWindow", "save", 0, QApplication::UnicodeUTF8));
         menuOpen->setTitle(QApplication::translate("MainWindow", "menu", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

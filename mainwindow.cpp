@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include"./src/utils/console.hpp"
 #include"./src/LocalConnect/local.h"
+#include<QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,8 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openFile()));
-
     connect(ui->actionClose, SIGNAL(triggered()), this, SLOT(closeFile()));
+    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(showAbout()));
+
+    this->initTextEdit();
 }
 
 MainWindow::~MainWindow()
@@ -21,7 +23,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_textEdit_textChanged()
 {
-
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -38,7 +39,7 @@ void MainWindow::on_pushButton_clicked()
 }
 
 void MainWindow::openFile(){
-    QString file_path = QFileDialog::getOpenFileName(this, "open", "", tr("Config Files (*.txt)"));
+    QString file_path = QFileDialog::getOpenFileName(this, "open", "", tr("Config Files (*)"));
     if(!file_path.isNull()){
         this->path_current = file_path;
         Local::getInstance()->connect(this->path_current.toStdString())([=](auto data){
@@ -63,5 +64,17 @@ void MainWindow::saveCurrentFile(){
 }
 
 void MainWindow::createNewFile(){
-    this->path_current = QFileDialog::getSaveFileName(this, "create new file", "", tr("Config Files (*.txt)"));
+    this->path_current = QFileDialog::getSaveFileName(this, "create new file", "", tr("Config Files (*)"));
+}
+
+void MainWindow::initTextEdit(){
+    QFont font = QFont(tr("Consolas"), 12);
+    ui->textEdit->setFont(font);
+    this->coder = std::make_shared<CodeColor>(ui->textEdit->document());
+}
+
+void MainWindow::showAbout(){
+    QMessageBox::about(NULL, "About", "Created by<font color='red'> AK-12(saber2pr) </font>"
+                                      "<br>"
+                                      "<a href='https://github.com/Saber2pr/Notepad'>view source on github</a>");
 }

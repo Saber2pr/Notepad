@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     w.show();
     w.setWindowTitle("Untitled");
     w.setMinimumSize(400, 299);
-    w.setMaximumSize(960, 640);
+    w.setWindowIcon(QIcon("./favicon.ico"));
 
     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForTr(codec);

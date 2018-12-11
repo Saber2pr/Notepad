@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include<QFileDialog>
+#include<./src/CodeColor/codecolor.h>
+#include<memory>
 
 namespace Ui {
 class MainWindow;
@@ -18,20 +20,22 @@ public:
 
 private slots:
     void on_textEdit_textChanged();
-
     void on_pushButton_clicked();
 
     void openFile();
-
     void closeFile();
+    void showAbout();
 
 private:
     Ui::MainWindow *ui;
     QString path_current;
+    std::shared_ptr<CodeColor> coder;
+    QString text_pre;
 
     void saveCurrentFile();
-
     void createNewFile();
+
+    void initTextEdit();
 
 };
 

@@ -2,3 +2,5 @@
 MakeFile*
 debug/
 release/
+build/
+data/

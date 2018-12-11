@@ -14,11 +14,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    src/LocalConnect/local.cpp
+    src/LocalConnect/local.cpp \
+    src/CodeColor/codecolor.cpp
 
 HEADERS  += mainwindow.h \
     src/LocalConnect/local.h \
     src/utils/console.hpp \
-    ui_mainwindow.h
+    ui_mainwindow.h \
+    src/CodeColor/codecolor.h \
+    src/vector/vectorhelper.hpp
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    favicon.ico
+
+RC_FILE = logo.rc
