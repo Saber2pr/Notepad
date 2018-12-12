@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include"./src/LocalConnect/local.h"
 #include<QMessageBox>
+#include"./src/PathResolver/pathresolver.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,7 +34,7 @@ void MainWindow::on_pushButton_clicked()
         this->createNewFile();
         if(!this->path_current.isNull()){
             this->saveCurrentFile();
-            this->setWindowTitle(QFileInfo(this->path_current).fileName());
+            this->displayCurrent();
         }
     }
 }
@@ -42,10 +43,7 @@ void MainWindow::openFile(){
     QString file_path = QFileDialog::getOpenFileName(this, "open", "", tr("Config Files (*)"));
     if(!file_path.isNull()){
         this->path_current = file_path;
-        Local::getInstance()->connect(this->path_current.toStdString())([=](auto data){
-            ui->textEdit->setText(QString::fromStdString(data));
-        });
-        this->setWindowTitle(QFileInfo(this->path_current).fileName());
+        this->displayCurrent();
     }
 }
 
@@ -71,6 +69,25 @@ void MainWindow::initTextEdit(){
     QFont font = QFont(tr("Consolas"), 12);
     ui->textEdit->setFont(font);
     this->coder = std::make_shared<CodeColor>(ui->textEdit->document());
+
+    if(PathResolver::getInstance()->value != ""){
+        this->path_current = QString::fromStdString(PathResolver::getInstance()->value);
+        this->displayCurrent();
+        this->setWindowTitle(QFileInfo(QString::fromStdString(PathResolver::getInstance()->value)).fileName());
+    }else {
+        this->setWindowTitle("Untitled");
+    }
+}
+
+void MainWindow::displayCurrent(){
+    if(this->path_current != ""){
+        Local::getInstance()->connect(this->path_current.toStdString())([=](auto data){
+            ui->textEdit->setText(QString::fromStdString(data));
+        });
+        this->setWindowTitle(QFileInfo(this->path_current).fileName());
+    }else{
+        this->setWindowTitle("Untitled");
+    }
 }
 
 void MainWindow::showAbout(){

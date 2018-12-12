@@ -1,13 +1,17 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include<QTextCodec>
+#include"./src/PathResolver/pathresolver.h"
 
 int main(int argc, char *argv[])
 {
+    if(argv[1] != NULL){
+        PathResolver::getInstance()->value = argv[1];
+    }
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    w.setWindowTitle("Untitled");
     w.setMinimumSize(400, 299);
     w.setWindowIcon(QIcon("./favicon.ico"));
 

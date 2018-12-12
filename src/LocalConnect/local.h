@@ -21,6 +21,7 @@ class Local
     typedef function<void(ThenCall)> Then;
 
 private:
+    Local();
     /**
      * @brief _instance
      */
@@ -47,7 +48,6 @@ private:
     void writeFile(string path, string value);
 
 public:
-    Local();
     ~Local();
     /**
      * @brief getInstance

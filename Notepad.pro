@@ -15,14 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     src/LocalConnect/local.cpp \
-    src/CodeColor/codecolor.cpp
+    src/CodeColor/codecolor.cpp \
+    src/PathResolver/pathresolver.cpp
 
 HEADERS  += mainwindow.h \
     src/LocalConnect/local.h \
     src/utils/console.hpp \
     ui_mainwindow.h \
     src/CodeColor/codecolor.h \
-    src/vector/vectorhelper.hpp
+    src/vector/vectorhelper.hpp \
+    src/PathResolver/pathresolver.h
 
 FORMS    += mainwindow.ui
 
