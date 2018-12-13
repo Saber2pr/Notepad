@@ -14,11 +14,11 @@ class Local
 {   /**
      * @brief ThenCall
      */
-    typedef function<void(string)> ThenCall;
+    using ThenCall = function<void(string)>;
     /**
      * @brief Then
      */
-    typedef function<void(ThenCall)> Then;
+    using Then = function<void(ThenCall)>;
 
 private:
     Local();
